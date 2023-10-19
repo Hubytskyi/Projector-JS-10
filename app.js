@@ -1,219 +1,100 @@
 "use strict";
 
-// var one;
+// let i = 0;
+// while (++i < 5) console.log(i);
+// while (i++ < 5) console.log(i);
 
-// console.log(one);
-// console.log(two);
-
-// one = 1;
-// let two = 2;
-
-// Одностроковий коментар
-
-/* Багатостроковий
-    коментар
-    ...
-*/
-
-// TODO: оновити отримання даних
-
-// let message2;
-// message2 = "привіт";
-
-// let message2 = "hello";
-// message2 = 42;
-
-// const name = "Андрій";
-// name = "Олег";
-
-// const return = 'some tex';
-
-// 'admin'
-
-// const USER_ADMIN = 'ADMIN';
-
-// const userAdmin
-
-// console.log(1n);
-// console.log(12);
-
-// console.log("Користувач 1 ${message2}");
-// console.log("Користувач 2");
-// console.log(`Користувач 3`);
-
-// const isVisible = true;
-// const isVisible2 = false;
-
-// const user = {
-//   name: "Петро",
-//   age: 42,
-// };
-
-// const array = [];
-// function sum() {}
-
-// let user2 = null;
-// let user3;
-
-// console.log(user2);
-// console.log(user3);
-
-// console.log(12 % 5);
-// console.log(15 % 5);
-
-// console.log(10 < 10);
-// console.log(10 != 10);
-
-// console.log("10s" === 10);
-
-// console.log(true && true && true && false);
-// console.log(true || false || false);
-// console.log(!true);
-// console.log(!false);
-
-// 0, null, undefined, false, '', NaN
-// console.log(!!0);
-// console.log(!!null);
-// console.log(!!undefined);
-// console.log(!!false);
-// console.log(!!"");
-// console.log(!!NaN);
-
-// Boolean(0) === !!0
-
-// let i = 3;
-
-// while (i < 3) {
-//   console.log(i);
-//   i++; // i = i + 1;
-// }
-
-// let y = 3;
-
-// do {
-//   console.log(y);
-//   y++; // i = i + 1;
-// } while (y < 3);
+// for (let i = 0; i < 5; i++) console.log(i);
+// for (let i = 0; i < 5; ++i) console.log(i);
 
 // for (let i = 0; i < 3; i++) {
-//   console.log(i);
+//   console.log(`number ${i}`);
 // }
 
-// let sum = 0;
+// let i = 0;
+// while (i < 3) {
+//   console.log(`number ${i}`);
+//   i++;
+// }
+
+// for (let i = 1; i > 0; i++) {
+//   console.log("while");
+// }
 
 // while (true) {
-//   const value = prompt("Введіть число", ""); // 10, '10' + '10', '1010';
-
-//   if (!value) break;
-
-//   sum += value; // sum = sum + value;
+//   console.log("while");
 // }
 
-// alert(sum);
+// const number = "10.42";
 
-// for (let i = 0; i < 10; i++) {
-//   console.log("i: ", i);
-//   if (i % 2 === 0) continue;
+// console.log(Number(number));
+// console.log(+number);
 
-//   console.log("i after condition: ", i);
+// console.log(parseFloat(number));
+// console.log(parseInt(number, 10));
+
+// const num = 42;
+// console.log(String(num));
+
+// console.log(null + "");
+
+// console.log(!!0);
+// console.log(!!false);
+// console.log(!!null);
+// console.log(!!undefined);
+// console.log(!!NaN);
+// console.log(!!"");
+
+// console.log(!!"1");
+// console.log(!!1);
+
+// console.log(BigInt(true));
+// console.log(BigInt("1ss"));
+// console.log(BigInt(1));
+// console.log(BigInt(false));
+
+// if (0 || false || null || 1) {
 // }
 
-// const year = prompt("Коли з'явився JS?", "");
-
-// console.log(year);
-
-// if (year < 1995) {
-//   console.log("Зарано");
-// } else if (year > 1995) {
-//   console.log("Запізно");
-// } else {
-//   console.log("Вірно");
+// if (0 && false && null && 1) {
 // }
 
-// const age = prompt("Вкажіть свій вік", "18"); // другий аргумент, як значення за замовчуванням
+// const a = undefined;
+// const b = 0;
+// const c = 1;
 
-// const isAllowed = age >= 18 ? true : false;
-// const isAllowed3 = age >= 18;
+// const d = b || c || a;
+// console.log(d);
 
-// console.log("isAllowed: ", isAllowed);
-// console.log("isAllowed3: ", isAllowed3);
+// const d = b && c && a;
+// console.log(d);
 
-// let isAllowed2;
+// const d = b ?? c ?? a;
+// console.log(d);
 
-// if (age >= 18) {
-//     isAllowed2 = true
-// } else {
-//     isAllowed2 = false;
-// }
+// console.log(Math.round(Math.random() * 100));
+// console.log(Math.floor(1.2));
+// console.log(Math.floor(1.9));
 
-// const user = {
-//   name: "Петро",
-//   age: 42,
-// };
+// console.log(Math.ceil(1.9));
+// console.log(Math.ceil(1.1));
 
-// if (user.name === "Петро") {
-//   // ...
-// } else if (user.name === "Петро" && user.age > 18) {
-//   // ...
-// }
+// console.log(Math.round(1.4));
+// console.log(Math.round(1.5));
+// console.log(Math.round(1.6));
+// console.log(Math.trunc(1.6));
 
-// const sum = 45;
+// console.log(+(42.556).toFixed(2));
 
-// switch (sum) {
-//   case 42:
-//     console.log("Вірно");
-//     break;
-//   case 45:
-//     console.log("Багато");
-//     break;
-//   case 20:
-//     console.log("Мало");
-//     break;
-//   default:
-//     console.log("Невідомо");
-// }
+// const str = "javascript";
+// console.log(str.length);
+// console.log(str.charAt(0));
+// console.log(str.toLowerCase());
+// console.log(str.toUpperCase());
 
-// if (sum === 42) {
-//   console.log("Вірно");
-// } else if (sum === 45) {
-//   console.log("Багато");
-// }
-
-// const user1 = {
-//   name: "Петро",
-//   age: 42,
-// };
-
-// const user2 = { // 45gw5gs5vw5vtw
-//   name: "Петро",
-//   age: 42,
-// };
-
-// let a = 1;
-// let b = 1;
-
-// let c = a; // c === 1; c === a
-// a = 2;
-// const user3 = user1;
-// user1.name = "Максим";
-// user3.name === user1.name;
-
-// console.log(user3 === user1);
-
-// console.log(user1 === user2);
-
-// for (let i = 0; i < 3; i++) {
-//   var one = 1;
-//   let two = 2;
-// }
-
-// console.log(one);
-// console.log(two);
-
-// var one = 1;
-// var one = 2;
-
-// one = 3;
-
-// let two = 2;
-// two = 2;
+// console.log(str.indexOf("as", 4));
+// console.log(str.includes("script"));
+// console.log(str.slice(0, 5));
+// console.log(str.substring(7, 5));
+// console.log(str.substr(7, 5));
+// console.log(str.trim());
