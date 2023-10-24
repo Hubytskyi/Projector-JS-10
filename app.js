@@ -1,100 +1,113 @@
 "use strict";
 
-// let i = 0;
-// while (++i < 5) console.log(i);
-// while (i++ < 5) console.log(i);
-
-// for (let i = 0; i < 5; i++) console.log(i);
-// for (let i = 0; i < 5; ++i) console.log(i);
-
-// for (let i = 0; i < 3; i++) {
-//   console.log(`number ${i}`);
+// function hello(message, number) {
+//   // те що отримуємо - це параметри
+//   console.log(message, number);
 // }
 
-// let i = 0;
-// while (i < 3) {
-//   console.log(`number ${i}`);
-//   i++;
+// hello("Привіт!", 10); // те що передаємо - це аргумент
+// hello("Hello!");
+
+// function showMessage(name = "незнайомець") {
+//   console.log(`Вітаю, ${name}`);
 // }
 
-// for (let i = 1; i > 0; i++) {
-//   console.log("while");
+// showMessage("Андрій");
+
+// function sum(a, b) {
+//   return a + b;
 // }
 
-// while (true) {
-//   console.log("while");
+// const result = sum(3, 3);
+// console.log(result);
+
+// function calc(a, b) {
+//   if (typeof a === "number" && typeof b === "number") {
+//     return a + b;
+//   }
+
+//   return;
 // }
 
-// const number = "10.42";
+// const result1 = calc(2, 2);
+// const result2 = calc(2, "3");
 
-// console.log(Number(number));
-// console.log(+number);
+// console.log("result1: ", result1);
+// console.log("result2: ", result2);
+// showUserFullName("John", "Doe");
 
-// console.log(parseFloat(number));
-// console.log(parseInt(number, 10));
-
-// const num = 42;
-// console.log(String(num));
-
-// console.log(null + "");
-
-// console.log(!!0);
-// console.log(!!false);
-// console.log(!!null);
-// console.log(!!undefined);
-// console.log(!!NaN);
-// console.log(!!"");
-
-// console.log(!!"1");
-// console.log(!!1);
-
-// console.log(BigInt(true));
-// console.log(BigInt("1ss"));
-// console.log(BigInt(1));
-// console.log(BigInt(false));
-
-// if (0 || false || null || 1) {
+// function showUserFullName(firstName, lastName) {
+//   //   console.log(firstName + " " + lastName);
+//   console.log(`${firstName} ${lastName}`);
 // }
 
-// if (0 && false && null && 1) {
+// function getUserFullName(firstName, lastName) {
+//   //   console.log(firstName + " " + lastName);
+//   return `${firstName} ${lastName}`;
 // }
 
-// const a = undefined;
-// const b = 0;
-// const c = 1;
+// showUserFullName("John", "Doe");
 
-// const d = b || c || a;
-// console.log(d);
+// console.log(getUserFullName("John", "Doe"));
 
-// const d = b && c && a;
-// console.log(d);
+// const sum = (a, b) => {
+//   return a + b;
+// };
 
-// const d = b ?? c ?? a;
-// console.log(d);
+// const sum2 = (a, b) => a + b; // return не потрібно
 
-// console.log(Math.round(Math.random() * 100));
-// console.log(Math.floor(1.2));
-// console.log(Math.floor(1.9));
+// const sum3 = () => 4 + 5;
+// const hello = (message) => console.log(message);
+// якщо один аргумент в стрілочнох функції, дужки можна прибрати
 
-// console.log(Math.ceil(1.9));
-// console.log(Math.ceil(1.1));
+// console.log(sum2(2, 2));
+// console.log(sum3());
+// hello("hello");
 
-// console.log(Math.round(1.4));
-// console.log(Math.round(1.5));
-// console.log(Math.round(1.6));
-// console.log(Math.trunc(1.6));
+// function greetingAlert(name) {
+//   alert(`Hello ${name}`);
+// }
 
-// console.log(+(42.556).toFixed(2));
+// function greetingConsole(name) {
+//   console.log(`Hello ${name}`);
+// }
 
-// const str = "javascript";
-// console.log(str.length);
-// console.log(str.charAt(0));
-// console.log(str.toLowerCase());
-// console.log(str.toUpperCase());
+// function processUserInput(callback) {
+//   // callback = greetingAlert
+//   const name = prompt("Введіть своє ім'я");
+//   callback(name); // greetingAlert(name)
+// }
 
-// console.log(str.indexOf("as", 4));
-// console.log(str.includes("script"));
-// console.log(str.slice(0, 5));
-// console.log(str.substring(7, 5));
-// console.log(str.substr(7, 5));
-// console.log(str.trim());
+// processUserInput(greetingAlert);
+// processUserInput(greetingConsole);
+
+// function showResult(user) {
+//     console.log(user)
+// }
+
+// function handleError(err) {
+//     console.log('Щось пішло не так', err)
+// }
+
+// function handleResult(resolve, reject) {
+//     const response = ...
+//     if (response) {
+//         resolve(response)
+//     }  else {
+//         reject('щось пішло не так')
+//     }
+// }
+
+// handleResult(showResult, handleError)
+
+function pow(x, n) {
+  console.log("x: ", x);
+  console.log("n: ", n);
+  if (n === 1) {
+    return x;
+  }
+
+  return x * pow(x, n - 1);
+}
+
+console.log(pow(2, 3));
