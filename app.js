@@ -1,113 +1,205 @@
 "use strict";
 
-// function hello(message, number) {
-//   // те що отримуємо - це параметри
-//   console.log(message, number);
+// const stack = ["HTML", "CSS", "JS"];
+// console.log(stack[0]);
+// console.log(stack);
+
+// stack[1] = "SCSS";
+// console.log(stack);
+// stack[3] = "React";
+// console.log(stack);
+// stack[10] = "React";
+// console.log(stack[4]);
+// console.log(stack);
+// console.log(stack.length);
+
+// console.log(stack[stack.length - 1]);
+// console.log(stack.at(-1));
+// console.log(typeof stack); {}
+
+// console.log(Array.isArray(stack)); // true
+// console.log(Array.isArray("stack")); // false
+
+// console.log(stack);
+// const result1 = stack.push("React");
+// const result2 = stack.unshift("Angular");
+// const result3 = stack.pop();
+// const result4 = stack.shift();
+// console.log(stack);
+// console.log(stack.length);
+// console.log(result4);
+
+// for (let i = 0; i < stack.length; i++) {
+//   console.log(stack[i]);
 // }
 
-// hello("Привіт!", 10); // те що передаємо - це аргумент
-// hello("Hello!");
+// stack.forEach((el, i, arr) => { // params: 1 - element, 2 - index, 3 - current array
+//   console.log(i, el, arr);
+// });
 
-// function showMessage(name = "незнайомець") {
-//   console.log(`Вітаю, ${name}`);
-// }
+// const stack = ["HTML", "CSS", "JS"];
+// const animals = ["Dogs", "Cats", "Rabbit"];
+// const nums = [1, "2", 5, 13, "42", 99, "8"]; // 1, 13, 2, 42, 5, 8, 99
 
-// showMessage("Андрій");
+// stack.splice(1, 0, "SCSS", "SASS", "VUE"); // start - 1 (CSS), deleteCount - 1 (CSS), items - SCSS
+// console.log(stack);
 
-// function sum(a, b) {
-//   return a + b;
-// }
+// const result = stack.slice(1, 2);
 
-// const result = sum(3, 3);
+// console.log(stack);
+// const result = stack.concat(animals, [1, 2, 3]);
+// const result2 = [].concat(animals, [1, 2, 3]);
+// console.log(stack);
 // console.log(result);
 
-// function calc(a, b) {
-//   if (typeof a === "number" && typeof b === "number") {
-//     return a + b;
+// const arr = [
+//   {
+//     id: 1,
+//     userName: "John",
+//   },
+//   {
+//     id: 2,
+//     userName: "Qwe",
+//   },
+// ];
+
+// stack.sort();
+// nums.sort((numA, numB) => {
+//   return numB - numA;
+// });
+
+// nums.sort((objA, objB) => {
+//   return objA.id - objB.id;
+// });
+
+// console.log(stack);
+// console.log(nums);
+// const arr = [];
+
+// animals.forEach((animal) => {
+//   arr.push(animal.toUpperCase());
+// });
+// const animals = ["Dogs", "Cats", "Rabbit"];
+
+// const result2 = animals.map((animal) => {
+//   if (animal.length > 5) {
+//     return animal.toUpperCase();
 //   }
 
-//   return;
+//   return animal;
+// }); // animals.length === result2.length ALWAYS!!!
+// const arr = [...animals];
+// console.log(animals);
+// console.log(...animals);
+// console.log(arr);
+// const arr = [].concat(animals);
+// const res = arr.reverse();
+// console.log(animals);
+// console.log(res);
+
+// const str = "Hello world!";
+// const splitedStr = str.split(" ");
+// const splitedStr = str.split(" ")[0];
+
+// const updatedArr = splitedStr.map((word) => {
+//   return `${word}-`;
+// });
+
+// const joinedArr = updatedArr.join(" --- ");
+
+// console.log(joinedArr);
+
+// const animals = ["Dogs", "Cats", "Rabbit"];
+// console.log(animals.indexOf("Dogs"));
+
+// if (animals.indexOf("Dogs", 1)) {
+//   console.log("Dogs");
+// } else {
+//   console.log("Empty");
 // }
 
-// const result1 = calc(2, 2);
-// const result2 = calc(2, "3");
-
-// console.log("result1: ", result1);
-// console.log("result2: ", result2);
-// showUserFullName("John", "Doe");
-
-// function showUserFullName(firstName, lastName) {
-//   //   console.log(firstName + " " + lastName);
-//   console.log(`${firstName} ${lastName}`);
+// if (animals.includes("Dogs", 1)) {
+//   console.log("Dogs");
+// } else {
+//   console.log("Empty");
 // }
 
-// function getUserFullName(firstName, lastName) {
-//   //   console.log(firstName + " " + lastName);
-//   return `${firstName} ${lastName}`;
+// const result = animals.find((animal) => {
+//   if (animal === "Cats") {
+//     return animal;
+//   }
+// });
+
+// const result3 = animals.find((animal) => {
+//   if (animal === "Cats") {
+//     return true;
+//   }
+// });
+
+// const result2 = animals.find((animal) => animal.length > 5);
+
+const animals = ["Dogs", "Dogs", "Cats", "Rabbit"];
+// const result = animals.filter((animal) => animal === "Dogs");
+
+// const result2 = animals.filter((animal) => {
+//   if (animal.length === 4) {
+//     return animal;
+//   }
+// });
+
+// const result3 = animals.filter((animal) => {
+//   if (animal.length === 4) {
+//     return true;
+//   }
+// });
+
+// const filteredArr = [];
+
+// for (let i = 0; i < animals.length; i++) {
+//   if (!filteredArr.includes(animals[i]) && animals[i] === "Dogs") {
+//     filteredArr.push(animals[i])
+//   }
 // }
+// console.log(result);
 
-// showUserFullName("John", "Doe");
+// const arr = [12, 3, 4, 5, [1, 2, 3, [3, [[[5]]]]]];
+// console.log(arr.flat(Infinity));
 
-// console.log(getUserFullName("John", "Doe"));
+// const nums = [1, 2, 3, 4, 5, 6, 7, 8];
 
-// const sum = (a, b) => {
-//   return a + b;
+// const result = nums.some((num) => {
+//   return num > 8;
+// });
+
+// const result2 = nums.every((num) => {
+//   return num > 0;
+// });
+
+// console.log(result2);
+
+// const user = {
+//   name: "Марія",
+//   age: 20,
+//   id: 1,
 // };
 
-// const sum2 = (a, b) => a + b; // return не потрібно
+// const users = [user];
 
-// const sum3 = () => 4 + 5;
-// const hello = (message) => console.log(message);
-// якщо один аргумент в стрілочнох функції, дужки можна прибрати
+// const nums = ['Губицький Микола']; // 'Губицький Микола' split(' ') // ['Губицький', 'Микола']
+// (el, index, array) => {}
+// (acc, cur, index, array) => {}
+const result = nums.reduce((acc, cur, index, arr) => {
+  return acc + cur;
+}); // 0 - початкове значення акамулятора (acc)
 
-// console.log(sum2(2, 2));
-// console.log(sum3());
-// hello("hello");
+console.log(result);
 
-// function greetingAlert(name) {
-//   alert(`Hello ${name}`);
-// }
+// 1
+// acc = 0
+// cur = 1
+// return acc(0) + cur(1) = 1
 
-// function greetingConsole(name) {
-//   console.log(`Hello ${name}`);
-// }
-
-// function processUserInput(callback) {
-//   // callback = greetingAlert
-//   const name = prompt("Введіть своє ім'я");
-//   callback(name); // greetingAlert(name)
-// }
-
-// processUserInput(greetingAlert);
-// processUserInput(greetingConsole);
-
-// function showResult(user) {
-//     console.log(user)
-// }
-
-// function handleError(err) {
-//     console.log('Щось пішло не так', err)
-// }
-
-// function handleResult(resolve, reject) {
-//     const response = ...
-//     if (response) {
-//         resolve(response)
-//     }  else {
-//         reject('щось пішло не так')
-//     }
-// }
-
-// handleResult(showResult, handleError)
-
-function pow(x, n) {
-  console.log("x: ", x);
-  console.log("n: ", n);
-  if (n === 1) {
-    return x;
-  }
-
-  return x * pow(x, n - 1);
-}
-
-console.log(pow(2, 3));
+// 2
+// acc = 1
+// cur = 2
+// return acc(1) + cur(2) = 3
