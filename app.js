@@ -1,133 +1,192 @@
-'use strict';
+"use strict";
 
-// const arr = ['orange', 'pineapple', 'orange'];
-// const fruits = new Set(arr);
+// const obj1 = {
+//   name: "John",
+// };
 
-// console.log(fruits)
+// const obj2 = {
+//   name2: "Jane",
+// };
 
-// const uniqueIds = new Set([1,2,3,4,4,5,5,6,7]);
+// const num1 = 1;
+// const num2 = 2;
 
-// console.log('uniqueIds: ', uniqueIds);
-// console.log('uniqueIds size: ', uniqueIds.size);
+// const result = Math.max(num1, num1, num1, num1, num1, num2);
+// console.log(result);
 
-// uniqueIds.add(8)
+// const math = {
+//   max: (...nums) => {
+//     console.log(nums);
+//   },
+// };
 
-// console.log('uniqueIds: ', uniqueIds);
-// console.log('uniqueIds size: ', uniqueIds.size);
+// math.max(num1, num1, num1, num1, num1, num2);
 
-// console.log('uniqueIds has: ', uniqueIds.has(9))
-// console.log('uniqueIds has: ', uniqueIds.has(8))
+// const obj3 = Object.assign(obj1, obj2, ...);
+// console.log(obj3);
 
-// uniqueIds.delete(8);
+// function sumAll(...args) {
+//   // args = [1, 4, 6, 6]
+//   let sum = 0;
 
-// console.log('uniqueIds: ', uniqueIds);
-// console.log('uniqueIds size: ', uniqueIds.size);
+//   for (let arg of args) {
+//     sum += arg;
+//   }
 
-// uniqueIds.clear();
-// console.log('uniqueIds: ', uniqueIds);
-
-
-// fruits.forEach((fruit, fruitAgain, coll) => {
-//     console.log('set: ', fruit, fruitAgain, coll)
-// })
-
-// arr.forEach((fruit, fruitAgain, array) => {
-//     console.log('arr: ', fruit, fruitAgain, array)
-// })
-
-// const arr = ['orange', 'pineapple', 'orange'];
-// const fruits = new Set(arr);
-
-// for(let value of fruits) {
-//     console.log(value)
+//   return sum;
 // }
 
-// const cheapShirt = { size: 'L', color: 'white' };
-// const fancyShirt = { size: 'L', color: 'white' };
+// console.log(sumAll(1));
+// console.log(sumAll(1, 2, 3));
+// console.log(sumAll(1, 4, 6, 6));
 
-// console.log(cheapShirt === fancyShirt);
-// console.log(cheapShirt === cheapShirt);
-
-// const set = new Set([cheapShirt, cheapShirt, fancyShirt]);
-// const set2 = new Set([{}, {}, {}]);
-// console.log(set2);
-
-// const set = new Set([1,2,3,4,4,5,5,6,7])
-// const nums = [1,2,3,4,4,5,5,6,7];
-// const uniqueIds = [...new Set([1,2,3,4,4,5,5,6,7])];
-// console.log(set)
-// console.log(uniqueIds)
-
-// [1,2,3,4,4,5,5,6,7] + ... = 1,2,3,4,4,5,5,6,7
-// [1,2,3, [1,2,3]] + ... = 1,2,3,[1,2,3]
-// const deepArray = [1,2,3,4,[1,2,3,5, [3454564]]];
-// console.log(deepArray.flat(Infinity));
-
-const user = {
-    id: 1,
-    name: "John",
-    role: "Software Engineer",
-    age: 10,
-    true: 'asdsa',
-};
-
-const userMap = new Map([
-    ['id', 1],
-    ['name', 'John'],
-    ['role', 'Software Engineer'],
-    ['age', 10],
-    ['Name Book', "Author Book"]
-]);
-
-// console.log(user.name)
-
-// function functionLikeKey() {
-//     return 123
+// function myBio(firstName, lastName, ...other) {
+//   console.log(arguments[0]); // не використовувати!
+//   return other; // "Developer", "JS"
 // }
 
-// userMap.set(true, 'test string')
-// userMap.set(functionLikeKey, 'value of function')
-// console.log(userMap)
+// console.log(myBio("John", "Jane", "Developer", "JS"));
+// myBio("John", "Jane", "Developer", "JS");
 
-// console.log(userMap.get('Name Book'))
+// const arr = [1, 2, 3, 5];
+// const res = Math.max(...arr); // arr => 1,2,3,5
+// console.log(res);
 
-// for(let key of Object.keys(user)) {
-//     console.log('user: ', key)
+// const math = {
+//   max: (...nums) => {
+//     console.log(nums);
+//   },
+// };
+
+// math.max(...arr);
+
+// function myBio(firstName, lastName, position, stack) {
+//   return `${firstName}, ${lastName}, ${position}, ${stack}`; // "Developer", "JS"
 // }
 
-// for(let key of userMap.keys()) {
-//     console.log('userMap key: ', userMap.get(key))
+// const arr = ["John", "Jane", "Developer", "JS"];
+// console.log(myBio(...arr)); // "John", "Jane", "Developer", "JS"
+
+// Lex Env
+
+// globalLexEnv = {
+//     environmentRecord: {
+//         getUser: посилання на функцію
+//     },
+//     outer: null
 // }
 
-// for(let value of userMap.values()) {
-//     console.log('userMap value: ', value)
+// function getUser(name) {
+//  getUserLexEnv = {
+//     environmentRecord: {
+//         name: "John",
+//         age: 42
+//     },
+//     outer: посилання на глобальний об'єкт
+// }
+//   const age = 42;
+
+//   return `${name}, ${age}`;
 // }
 
-// for(let el of userMap) {
-//     console.log('userMap el: ', el)
+// getUser("John");
+
+// const a = "global";
+
+// function outer() {
+//   const b = "outer";
+
+//   function inner() {
+//     const c = "inner";
+
+//     console.log(c);
+//     console.log(b);
+//     console.log(a);
+//   }
+
+//   console.log(a);
+//   console.log(b);
+
+//   inner();
 // }
 
-// userMap.forEach((value, key, map) => {
-//     console.log(value, key, map)
-// })
+// outer();
+// console.log(a);
 
-// let john = {name: 'John'};
-// const arr = [john];
+// шукаємо name
+// const name = "John";
 
-// console.log(john)
-// console.log(arr)
+// function getPersonName() {
+//   // шукаємо name
+//   const name = "Jane";
 
-// const weakMap = new WeakMap();
-// // weakMap.set(john, '...')
-
-// john = null;
-
-// let sum = 0;
-
-// for(let i = 0; i < 100000000; i++) {
-//     sum+=i;
+//   return function displayName() {
+//     // шукаємо name
+//     console.log(name);
+//   };
 // }
 
-// console.log(john)
-// // console.log(weakMap)
-// console.log(arr)
+// const person = getPersonName();
+// person();
+// console.log(person);
+
+//  getCounterLexEnv = {
+//     environmentRecord: {
+//         count: "John",
+//         anom: посилання на функцію
+//     },
+//     outer: посилання на глобальний об'єкт
+// }
+
+//  getCounterLexEnv = {
+//     environmentRecord: {
+//
+//     },
+//     outer: посилання на батьківську функцію
+// }
+
+// function getCounter() {
+//   let count = 0;
+
+//   return function () {
+//     return count++;
+//   };
+// }
+
+// const counter = getCounter();
+// const counter1 = getCounter();
+// console.log(counter);
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter1());
+// console.log(counter1());
+// console.log(counter1());
+
+// let count = 0;
+
+// function counter() {
+//   return count++;
+// }
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+
+// function getCounter() {
+//   let count = 0;
+
+//   return count++;
+// }
+// console.log(getCounter());
+// console.log(getCounter());
+// console.log(getCounter());
+
+function aFunc() {}
+
+const aSomeNum = 1;
+// var aNextNum = 2;
+
+// console.log(window);
+console.log(globalThis);
