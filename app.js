@@ -72,6 +72,14 @@
 // globalLexEnv = {
 //     environmentRecord: {
 //         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
+//         getUser: посилання на функцію
 //     },
 //     outer: null
 // }
