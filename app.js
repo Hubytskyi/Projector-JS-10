@@ -1,86 +1,316 @@
 "use strict";
 
-// function sayHello() {
-//   alert("Hello");
+const stuffData = {
+  firstName: "John",
+  secondName: "Smith",
+  age: 42,
+  gender: "male",
+  role: "CEO",
+  yearsOfExperience: 1,
+  inCompanySince: "03 Aug 2005",
+  subordinators: [
+    {
+      firstName: "Jane",
+      secondName: "Clark",
+      age: 34,
+      gender: "female",
+      role: "Chief HR officer",
+      yearsOfExperience: 12,
+      inCompanySince: "12 May 2017",
+      subordinators: [
+        {
+          firstName: "Ferenz",
+          secondName: "Derd",
+          age: 27,
+          gender: "male",
+          role: "Senior HR manager",
+          yearsOfExperience: 7,
+          inCompanySince: "15 Oct 2019",
+          subordinators: [
+            {
+              firstName: "Gregor",
+              secondName: "Bur",
+              age: 26,
+              gender: "male",
+              role: "Middle HR manager",
+              yearsOfExperience: 7,
+              inCompanySince: "22 Apr 2020",
+              subordinators: [
+                {
+                  firstName: "Caleb",
+                  secondName: "Ottvik",
+                  age: 24,
+                  gender: "male",
+                  role: "Junior HR manager",
+                  yearsOfExperience: 7,
+                  inCompanySince: "04 Jun 2020",
+                  subordinators: null,
+                },
+                {
+                  firstName: "Peri",
+                  secondName: "Hafar",
+                  age: 22,
+                  gender: "female",
+                  role: "Junior HR manager",
+                  yearsOfExperience: 7,
+                  inCompanySince: "18 Dec 2021",
+                  subordinators: null,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          firstName: "Syenn",
+          secondName: "Gungvind",
+          age: 38,
+          gender: "female",
+          role: "Senior HR manager",
+          yearsOfExperience: 15,
+          inCompanySince: "12 May 2012",
+          subordinators: [
+            {
+              firstName: "Enos",
+              secondName: "Zey",
+              age: 30,
+              gender: "male",
+              role: "Middle HR manager",
+              yearsOfExperience: 5,
+              inCompanySince: "18 Dec 2020",
+              subordinators: [
+                {
+                  firstName: "Caleb",
+                  secondName: "Ottvik",
+                  age: 24,
+                  gender: "male",
+                  role: "Junior HR manager",
+                  yearsOfExperience: 7,
+                  inCompanySince: "04 Jun 2020",
+                  subordinators: null,
+                },
+              ],
+            },
+            {
+              firstName: "Caleb",
+              secondName: "Ottvik",
+              age: 24,
+              gender: "male",
+              role: "Junior HR manager",
+              yearsOfExperience: 7,
+              inCompanySince: "04 Jun 2020",
+              subordinators: null,
+            },
+            {
+              firstName: "Peri",
+              secondName: "Hafar",
+              age: 22,
+              gender: "female",
+              role: "Junior HR manager",
+              yearsOfExperience: 7,
+              inCompanySince: "18 Dec 2021",
+              subordinators: null,
+            },
+          ],
+        },
+        {
+          firstName: "Enos",
+          secondName: "Zey",
+          age: 30,
+          gender: "male",
+          role: "Middle HR manager",
+          yearsOfExperience: 5,
+          inCompanySince: "18 Dec 2020",
+          subordinators: [
+            {
+              firstName: "Caleb",
+              secondName: "Ottvik",
+              age: 24,
+              gender: "male",
+              role: "Junior HR manager",
+              yearsOfExperience: 7,
+              inCompanySince: "04 Jun 2020",
+              subordinators: null,
+            },
+          ],
+        },
+        {
+          firstName: "Gregor",
+          secondName: "Bur",
+          age: 26,
+          gender: "male",
+          role: "Middle HR manager",
+          yearsOfExperience: 7,
+          inCompanySince: "22 Apr 2020",
+          subordinators: [
+            {
+              firstName: "Caleb",
+              secondName: "Ottvik",
+              age: 24,
+              gender: "male",
+              role: "Junior HR manager",
+              yearsOfExperience: 7,
+              inCompanySince: "04 Jun 2020",
+              subordinators: null,
+            },
+            {
+              firstName: "Peri",
+              secondName: "Hafar",
+              age: 22,
+              gender: "female",
+              role: "Junior HR manager",
+              yearsOfExperience: 7,
+              inCompanySince: "18 Dec 2021",
+              subordinators: null,
+            },
+          ],
+        },
+        {
+          firstName: "Caleb",
+          secondName: "Ottvik",
+          age: 24,
+          gender: "male",
+          role: "Junior HR manager",
+          yearsOfExperience: 7,
+          inCompanySince: "04 Jun 2020",
+          subordinators: null,
+        },
+        {
+          firstName: "Peri",
+          secondName: "Hafar",
+          age: 22,
+          gender: "female",
+          role: "Junior HR manager",
+          yearsOfExperience: 7,
+          inCompanySince: "18 Dec 2021",
+          subordinators: null,
+        },
+      ],
+    },
+    {
+      firstName: "Olga",
+      secondName: "Petrenko",
+      age: 31,
+      gender: "female",
+      role: "CTO",
+      yearsOfExperience: 12,
+      inCompanySince: "15 Apr 2019",
+      subordinators: [
+        {
+          firstName: "Peter",
+          secondName: "Barton",
+          age: 29,
+          gender: "male",
+          role: "JS competence manager",
+          yearsOfExperience: 11,
+          inCompanySince: "01 Feb 2020",
+          subordinators: null,
+        },
+      ],
+    },
+    {
+      firstName: "Jack",
+      secondName: "Black",
+      age: 45,
+      gender: "male",
+      role: "Office manager",
+      yearsOfExperience: 20,
+      inCompanySince: "24 Apr 2016",
+      subordinators: null,
+    },
+  ],
+};
 
-//   setTimeout(sayHello, 2000);
+// План
+// 1. потрібні дістати всі вложені об'єкти
+// 2. відфільтрувати працівників
+// 3. посортувати працівників
+// 4. відобразити інформацію по кожному працівнику
+
+function parssingStuff(workersData, property) {
+  let workersArray = [];
+  flatStuff(workersData, workersArray);
+  const uniqueWorkers = filterUniqueWorker(workersArray);
+  const sortedWorkers = [...uniqueWorkers].sort(sortWorkers(property));
+
+  displayWorkers(sortedWorkers);
+}
+
+function flatStuff(stuffStructure, workersArray) {
+  workersArray.push(stuffStructure);
+
+  if (stuffStructure.subordinators === null) {
+    return null;
+  }
+
+  stuffStructure.subordinators.forEach((subordinator) => {
+    flatStuff(subordinator, workersArray);
+  });
+}
+
+// const map = new Map([
+//   ["key", "value"], // "value"
+//   ["key", "value"],
+//   ["key", "value"],
+// ]);
+
+// const arr = [1, 2, 3, 4];
+// console.log(...arr);
+
+// function filterUniqueWorker(workers) {
+//   const preparedWorkerForMap = workers.map((worker) => {
+//     return [`${worker.firstName} ${worker.secondName}`, worker];
+//   });
+
+//   const workersMap = new Map(preparedWorkerForMap);
+//   const workersValues = workersMap.values();
+//   const newArr = [...workersValues];
+
+//   return newArr;
 // }
 
-// const id = setTimeout(sayHello, 2000);
+function filterUniqueWorker(workers) {
+  const uniqueArr = [];
 
-// const id2 = setTimeout(sayHello, 3000);
+  const filteredWorkers = workers.filter((worker) => {
+    const key = worker.firstName + " " + worker.secondName;
 
-// clearTimeout(id2);
+    if (!uniqueArr.includes(key)) {
+      uniqueArr.push(key);
+      return true;
+    }
+  });
 
-// const id = setInterval(sayHello, 1000);
+  return filteredWorkers;
+}
 
-// clearInterval(id);
+function sortWorkers(property = "age") {
+  return (workerA, workerB) => (workerA[property] > workerB[property] ? 1 : -1);
+}
 
-// setInterval(sayHello, 1000); // alert
+function getYears(years) {
+  if (years > 1) {
+    return "years";
+  }
 
-// function getName(role, test) {
-//   console.log(`My name is ${this.name}, ${role}, ${test}`);
-//   return 1;
-// }
+  return "year";
+}
 
-// const name = "Jane";
+function displayWorkers(workers) {
+  workers.forEach((worker) => {
+    const duration = Math.floor(
+      (new Date() - new Date(worker.inCompanySince)) / 1000 / 31536000
+    );
 
-// const user1 = {
-//   id: 1,
-//   name: "John",
-//   age: 42,
-//   sayHello: function () {
-//     console.log(`My name is ${user1.name}`);
-//   },
-//   getName: getName,
-//   roles: ["admin", "user"],
-//   showRoles() {
-//     this.roles.forEach((role) => {
-//       console.log("this: ", this);
-//       console.log(`My name is ${this.name}, my role - ${role}`);
-//     });
-//   },
-// };
+    const workerFullName = `${worker.firstName} ${worker.secondName}`;
 
-// setTimeout(user1.getName.bind(user1), 1000);
-// const newGetName = user1.getName.bind(user1);
+    const workerInfo = `
+        ${workerFullName} as a ${worker.role}, has ${
+      worker.yearsOfExperience
+    } ${getYears(worker.yearsOfExperience)} of experience and works ${duration} 
+        ${getYears(duration)} in the company.`;
 
-// якщо ми передаємо функцію як аргумент або записуємо її в змінну
-// і якщо функція не викликається - втрачається контекст
+    console.log(workerInfo);
+  });
+}
 
-// newGetName();
-
-// const user2 = {
-//   id: 2,
-//   atest: "Jane",
-//   age: 22,
-//   sayHello: () => {
-//     console.log(this);
-//     console.log(`My name is ${this.age}`);
-//   },
-//   getName, // getName: getName === getName
-// };
-
-// user2.sayHello();
-
-// user1.showRoles();
-// user2.sayHello();
-// console.log(this);
-// const arr = ["admin", "test"]
-// const newGetName = user1.getName.bind(user1, "admin", "test"); // кількість параметрів
-// const res = user1.getName.call(user1, "admin", "test"); // кількість параметрів
-// user1.getName.apply(user1, arr); // масив параметрів
-// console.log(newGetName());
-// bind - не викликає функцію, а тільки змінює контекст
-// call, apply - викликають функцію одразу
-
-// function outer() {
-//   console.log(this);
-//   function inner() {
-//     console.log(this);
-//   }
-
-//   inner();
-// }
-
-// outer();
+parssingStuff(stuffData, "firstName");
