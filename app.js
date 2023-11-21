@@ -1,316 +1,122 @@
 "use strict";
 
-const stuffData = {
-  firstName: "John",
-  secondName: "Smith",
-  age: 42,
-  gender: "male",
-  role: "CEO",
-  yearsOfExperience: 1,
-  inCompanySince: "03 Aug 2005",
-  subordinators: [
-    {
-      firstName: "Jane",
-      secondName: "Clark",
-      age: 34,
-      gender: "female",
-      role: "Chief HR officer",
-      yearsOfExperience: 12,
-      inCompanySince: "12 May 2017",
-      subordinators: [
-        {
-          firstName: "Ferenz",
-          secondName: "Derd",
-          age: 27,
-          gender: "male",
-          role: "Senior HR manager",
-          yearsOfExperience: 7,
-          inCompanySince: "15 Oct 2019",
-          subordinators: [
-            {
-              firstName: "Gregor",
-              secondName: "Bur",
-              age: 26,
-              gender: "male",
-              role: "Middle HR manager",
-              yearsOfExperience: 7,
-              inCompanySince: "22 Apr 2020",
-              subordinators: [
-                {
-                  firstName: "Caleb",
-                  secondName: "Ottvik",
-                  age: 24,
-                  gender: "male",
-                  role: "Junior HR manager",
-                  yearsOfExperience: 7,
-                  inCompanySince: "04 Jun 2020",
-                  subordinators: null,
-                },
-                {
-                  firstName: "Peri",
-                  secondName: "Hafar",
-                  age: 22,
-                  gender: "female",
-                  role: "Junior HR manager",
-                  yearsOfExperience: 7,
-                  inCompanySince: "18 Dec 2021",
-                  subordinators: null,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          firstName: "Syenn",
-          secondName: "Gungvind",
-          age: 38,
-          gender: "female",
-          role: "Senior HR manager",
-          yearsOfExperience: 15,
-          inCompanySince: "12 May 2012",
-          subordinators: [
-            {
-              firstName: "Enos",
-              secondName: "Zey",
-              age: 30,
-              gender: "male",
-              role: "Middle HR manager",
-              yearsOfExperience: 5,
-              inCompanySince: "18 Dec 2020",
-              subordinators: [
-                {
-                  firstName: "Caleb",
-                  secondName: "Ottvik",
-                  age: 24,
-                  gender: "male",
-                  role: "Junior HR manager",
-                  yearsOfExperience: 7,
-                  inCompanySince: "04 Jun 2020",
-                  subordinators: null,
-                },
-              ],
-            },
-            {
-              firstName: "Caleb",
-              secondName: "Ottvik",
-              age: 24,
-              gender: "male",
-              role: "Junior HR manager",
-              yearsOfExperience: 7,
-              inCompanySince: "04 Jun 2020",
-              subordinators: null,
-            },
-            {
-              firstName: "Peri",
-              secondName: "Hafar",
-              age: 22,
-              gender: "female",
-              role: "Junior HR manager",
-              yearsOfExperience: 7,
-              inCompanySince: "18 Dec 2021",
-              subordinators: null,
-            },
-          ],
-        },
-        {
-          firstName: "Enos",
-          secondName: "Zey",
-          age: 30,
-          gender: "male",
-          role: "Middle HR manager",
-          yearsOfExperience: 5,
-          inCompanySince: "18 Dec 2020",
-          subordinators: [
-            {
-              firstName: "Caleb",
-              secondName: "Ottvik",
-              age: 24,
-              gender: "male",
-              role: "Junior HR manager",
-              yearsOfExperience: 7,
-              inCompanySince: "04 Jun 2020",
-              subordinators: null,
-            },
-          ],
-        },
-        {
-          firstName: "Gregor",
-          secondName: "Bur",
-          age: 26,
-          gender: "male",
-          role: "Middle HR manager",
-          yearsOfExperience: 7,
-          inCompanySince: "22 Apr 2020",
-          subordinators: [
-            {
-              firstName: "Caleb",
-              secondName: "Ottvik",
-              age: 24,
-              gender: "male",
-              role: "Junior HR manager",
-              yearsOfExperience: 7,
-              inCompanySince: "04 Jun 2020",
-              subordinators: null,
-            },
-            {
-              firstName: "Peri",
-              secondName: "Hafar",
-              age: 22,
-              gender: "female",
-              role: "Junior HR manager",
-              yearsOfExperience: 7,
-              inCompanySince: "18 Dec 2021",
-              subordinators: null,
-            },
-          ],
-        },
-        {
-          firstName: "Caleb",
-          secondName: "Ottvik",
-          age: 24,
-          gender: "male",
-          role: "Junior HR manager",
-          yearsOfExperience: 7,
-          inCompanySince: "04 Jun 2020",
-          subordinators: null,
-        },
-        {
-          firstName: "Peri",
-          secondName: "Hafar",
-          age: 22,
-          gender: "female",
-          role: "Junior HR manager",
-          yearsOfExperience: 7,
-          inCompanySince: "18 Dec 2021",
-          subordinators: null,
-        },
-      ],
-    },
-    {
-      firstName: "Olga",
-      secondName: "Petrenko",
-      age: 31,
-      gender: "female",
-      role: "CTO",
-      yearsOfExperience: 12,
-      inCompanySince: "15 Apr 2019",
-      subordinators: [
-        {
-          firstName: "Peter",
-          secondName: "Barton",
-          age: 29,
-          gender: "male",
-          role: "JS competence manager",
-          yearsOfExperience: 11,
-          inCompanySince: "01 Feb 2020",
-          subordinators: null,
-        },
-      ],
-    },
-    {
-      firstName: "Jack",
-      secondName: "Black",
-      age: 45,
-      gender: "male",
-      role: "Office manager",
-      yearsOfExperience: 20,
-      inCompanySince: "24 Apr 2016",
-      subordinators: null,
-    },
-  ],
-};
+// console.log(navigator);
 
-// План
-// 1. потрібні дістати всі вложені об'єкти
-// 2. відфільтрувати працівників
-// 3. посортувати працівників
-// 4. відобразити інформацію по кожному працівнику
+// const user = {
+//   id: 1,
+//   name: "John",
+// };
 
-function parssingStuff(workersData, property) {
-  let workersArray = [];
-  flatStuff(workersData, workersArray);
-  const uniqueWorkers = filterUniqueWorker(workersArray);
-  const sortedWorkers = [...uniqueWorkers].sort(sortWorkers(property));
+// JSON.parse()
+// JSON.stringify()
 
-  displayWorkers(sortedWorkers);
-}
+// localStorage.setItem("user", JSON.stringify(user));
+// localStorage.setItem("user2", JSON.stringify(user));
+// const userFromLS = localStorage.getItem("user");
+// const parseUser = JSON.parse(userFromLS);
+// console.log(parseUser);
 
-function flatStuff(stuffStructure, workersArray) {
-  workersArray.push(stuffStructure);
+// localStorage.removeItem("user2");
+// localStorage.clear();
 
-  if (stuffStructure.subordinators === null) {
-    return null;
-  }
+// const localStorageCustom = {
+//   user: {
+//     id: 1,
+//     name: "John",
+//   }
+// };
 
-  stuffStructure.subordinators.forEach((subordinator) => {
-    flatStuff(subordinator, workersArray);
-  });
-}
+// localStorageCustom.addItem()
 
-// const map = new Map([
-//   ["key", "value"], // "value"
-//   ["key", "value"],
-//   ["key", "value"],
-// ]);
+// console.log(document.body.firstChild);
+// console.log(document.body.firstElementChild);
 
-// const arr = [1, 2, 3, 4];
-// console.log(...arr);
+// console.log(document.body.childNodes);
+// console.log(document.body.children); // children - всі дочірні елементи
 
-// function filterUniqueWorker(workers) {
-//   const preparedWorkerForMap = workers.map((worker) => {
-//     return [`${worker.firstName} ${worker.secondName}`, worker];
-//   });
+// const title = document.querySelector('h1');
+// const title2 = document.querySelector('.title');
+// const title3 = document.querySelector('#main-title');
 
-//   const workersMap = new Map(preparedWorkerForMap);
-//   const workersValues = workersMap.values();
-//   const newArr = [...workersValues];
+// const title4 = document.getElementById('main-title');
+// const section = document.querySelector('.section-one');
 
-//   return newArr;
+// console.log(section.previousElementSibling);
+// console.log(section.nextElementSibling);
+// console.log(section.firstElementChild);
+// console.log(section.firstChild);
+
+// const item = document.querySelector('.item');
+// const items = document.querySelectorAll('.item');
+// const secondTitle = document.querySelector('.second-title')
+// console.log(item.closest('.test'));
+// console.log(item.closest('.section-one').querySelector('#block'));
+// console.log(section.contains(secondTitle));
+// console.log([...items]);
+// [...items].forEach(item => console.log(item));
+
+// function generateDivs(text) {
+//     const div = document.createElement('sdgdsfgdfg');
+
+//     // 1
+//     const textNode = document.createTextNode('text');
+//     div.appendChild(textNode);
+
+//     // 2
+//     div.innerHTML = text;
+
+//     return div;
 // }
 
-function filterUniqueWorker(workers) {
-  const uniqueArr = [];
+// const generatedDiv = generateDivs('some text');
+// console.log(generatedDiv)
 
-  const filteredWorkers = workers.filter((worker) => {
-    const key = worker.firstName + " " + worker.secondName;
+// const list = document.querySelector('.list')
+// const li = document.createElement('li')
+// li.innerHTML = 'Some text'
+// list.after(li);
+// list.prepend(li);
 
-    if (!uniqueArr.includes(key)) {
-      uniqueArr.push(key);
-      return true;
-    }
-  });
+// list.insertAdjacentHTML('beforeend', `
+//     <li class="item">Item #4</li>
+//     <li class="item">Item #5</li>
+//     <li class="item">Item #6</li>
+// `)
 
-  return filteredWorkers;
+const secondTitle = document.querySelector('.second-title');
+// secondTitle.className = 'new-title';
+// const items = document.querySelectorAll('.item')
+// const item = document.querySelector('.item')
+// item.classList = 'new-title'
+// items.forEach((item) => {
+//     item.className = 'new-item'
+// })
+// console.log(secondTitle)
+
+// secondTitle.classList.add('new-title');
+// secondTitle.classList.remove('test');
+
+// if (secondTitle.classList.contains('new-title')) {
+//     console.log('secondTitle contains new-title')
+// }
+
+function toggleActiveClass(element) {
+    element.classList.toggle('active')
+    // if (element.classList.contains('active')) {
+    //     element.classList.remove('active');
+    //     return;
+    // }
+
+    // element.classList.add('active');
 }
 
-function sortWorkers(property = "age") {
-  return (workerA, workerB) => (workerA[property] > workerB[property] ? 1 : -1);
-}
+toggleActiveClass(secondTitle);
+toggleActiveClass(secondTitle);
+toggleActiveClass(secondTitle);
+toggleActiveClass(secondTitle);
 
-function getYears(years) {
-  if (years > 1) {
-    return "years";
-  }
+// secondTitle.style = 'color: red; background-color: green'
+// secondTitle.style.fontSize = '50px';
 
-  return "year";
-}
-
-function displayWorkers(workers) {
-  workers.forEach((worker) => {
-    const duration = Math.floor(
-      (new Date() - new Date(worker.inCompanySince)) / 1000 / 31536000
-    );
-
-    const workerFullName = `${worker.firstName} ${worker.secondName}`;
-
-    const workerInfo = `
-        ${workerFullName} as a ${worker.role}, has ${
-      worker.yearsOfExperience
-    } ${getYears(worker.yearsOfExperience)} of experience and works ${duration} 
-        ${getYears(duration)} in the company.`;
-
-    console.log(workerInfo);
-  });
-}
-
-parssingStuff(stuffData, "firstName");
+// console.log(secondTitle.clientWidth)
+// console.log(secondTitle.offsetLeft)
