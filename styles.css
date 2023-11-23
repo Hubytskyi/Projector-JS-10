@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+tr {
+  cursor: pointer;
+  background-color: #7a3838;
+}
+
 body {
   background-color: #3548fe;
   width: 100%;
@@ -21,4 +26,8 @@ h1 {
 
 .active {
   color: red;
+}
+
+#block {
+  background-color: orange;
 }

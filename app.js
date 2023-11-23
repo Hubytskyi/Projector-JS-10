@@ -1,122 +1,124 @@
 "use strict";
 
-// console.log(navigator);
+// const title = document.querySelector(".title");
+// console.log(title);
 
-// const user = {
-//   id: 1,
-//   name: "John",
-// };
+// console.log(title.hasAttribute("id"));
+// console.log(title.hasAttribute("class"));
+// console.log(title.hasAttribute("href"));
 
-// JSON.parse()
-// JSON.stringify()
+// console.log(title.getAttribute("id"));
+// title.setAttribute("class", "class-from-attr");
+// title.setAttribute("id", "header");
 
-// localStorage.setItem("user", JSON.stringify(user));
-// localStorage.setItem("user2", JSON.stringify(user));
-// const userFromLS = localStorage.getItem("user");
-// const parseUser = JSON.parse(userFromLS);
-// console.log(parseUser);
+// title.removeAttribute("id");
+// console.log(title.attributes);
 
-// localStorage.removeItem("user2");
-// localStorage.clear();
+// console.log(title.dataset);
 
-// const localStorageCustom = {
-//   user: {
-//     id: 1,
-//     name: "John",
+// console.log(title.nodeType);
+// console.log(title.firstChild.nodeType);
+// console.log(document.nodeType);
+
+// console.log(title.nodeName);
+// console.log(title.firstChild.nodeName);
+// console.log(document.nodeName);
+
+// console.log(title.textContent);
+// console.log(title.firstChild);
+
+// const button = document.querySelector(".button");
+// const block = document.querySelector("#block");
+// console.log(block);
+
+// function handleClick() {
+//   console.log("click");
+// }
+
+// function handleMouseOver() {
+//   const randomHeight = Math.round(Math.random() * 100);
+//   block.style.height = `${randomHeight}px`;
+//   console.log("mouseover");
+// }
+
+// function handleMouseOut() {
+//   console.log("mouseout");
+// }
+
+// button.addEventListener("click", handleClick);
+// block.addEventListener("mouseover", handleMouseOver);
+// block.addEventListener("mouseout", handleMouseOut);
+
+// const form = document.querySelector("form");
+// function handleSubmit(event) {
+//   event.preventDefault();
+//   const name = event.target.name.value;
+//   const email = event.target.email.value;
+
+//   if (name.length < 2) {
+//     alert("Введіть довше ім'я");
+//     return;
 //   }
-// };
 
-// localStorageCustom.addItem()
+//   // відправка на сервер
+//   console.log("event: ", event.target.name.value);
+//   console.log("event: ", event.target.email.value);
+// }
+// form.addEventListener("submit", handleSubmit);
+// form.addEventListener("submit", (event) => {});
 
-// console.log(document.body.firstChild);
-// console.log(document.body.firstElementChild);
+// window.addEventListener("scroll", (e) => {
+//   if (window.scrollY > 20) {
+//     alert("Реклама");
+//   }
+// });
 
-// console.log(document.body.childNodes);
-// console.log(document.body.children); // children - всі дочірні елементи
+// window.addEventListener("resize", (e) => {
+//   console.log(window);
+// });
 
-// const title = document.querySelector('h1');
-// const title2 = document.querySelector('.title');
-// const title3 = document.querySelector('#main-title');
+// const button = document.querySelector("button");
+// // console.log(button);
+// button.addEventListener("click", () => {
+//   console.log("click on button");
+// });
 
-// const title4 = document.getElementById('main-title');
-// const section = document.querySelector('.section-one');
+// const li = document.querySelector("li");
+// li.addEventListener("click", () => {
+//   console.log("click on li");
+// });
 
-// console.log(section.previousElementSibling);
-// console.log(section.nextElementSibling);
-// console.log(section.firstElementChild);
-// console.log(section.firstChild);
+// const tableRows = document.querySelectorAll("tr");
+// tableRows.forEach((row) => {
+//   row.addEventListener("click", () => {
+//     console.log("redirect");
+//   });
+// });
 
-// const item = document.querySelector('.item');
-// const items = document.querySelectorAll('.item');
-// const secondTitle = document.querySelector('.second-title')
-// console.log(item.closest('.test'));
-// console.log(item.closest('.section-one').querySelector('#block'));
-// console.log(section.contains(secondTitle));
-// console.log([...items]);
-// [...items].forEach(item => console.log(item));
-
-// function generateDivs(text) {
-//     const div = document.createElement('sdgdsfgdfg');
-
-//     // 1
-//     const textNode = document.createTextNode('text');
-//     div.appendChild(textNode);
-
-//     // 2
-//     div.innerHTML = text;
-
-//     return div;
+// function handleButtonClick(event) {
+//   event.stopPropagation();
+//   console.log("open drawer", event);
 // }
 
-// const generatedDiv = generateDivs('some text');
-// console.log(generatedDiv)
+// const tableButtons = document.querySelectorAll("button");
+// tableButtons.forEach((button) => {
+//   button.addEventListener("click", handleButtonClick, true);
+// });
 
-// const list = document.querySelector('.list')
-// const li = document.createElement('li')
-// li.innerHTML = 'Some text'
-// list.after(li);
-// list.prepend(li);
+detonatorTimer(3);
+// 3
+// 2
+// 1
+// BOOM!
 
-// list.insertAdjacentHTML('beforeend', `
-//     <li class="item">Item #4</li>
-//     <li class="item">Item #5</li>
-//     <li class="item">Item #6</li>
-// `)
-
-const secondTitle = document.querySelector('.second-title');
-// secondTitle.className = 'new-title';
-// const items = document.querySelectorAll('.item')
-// const item = document.querySelector('.item')
-// item.classList = 'new-title'
-// items.forEach((item) => {
-//     item.className = 'new-item'
-// })
-// console.log(secondTitle)
-
-// secondTitle.classList.add('new-title');
-// secondTitle.classList.remove('test');
-
-// if (secondTitle.classList.contains('new-title')) {
-//     console.log('secondTitle contains new-title')
+// detonatorTimer(delay) {
+// 	const timerId = setInterval(() => {
+//         if ('some condition...') {
+//             console.log('...')
+//             delay--
+//         } else {
+//             console.log('BOOM!')
+//             clearInterval(timerId);
+//         }
+//     }, 1000)
 // }
-
-function toggleActiveClass(element) {
-    element.classList.toggle('active')
-    // if (element.classList.contains('active')) {
-    //     element.classList.remove('active');
-    //     return;
-    // }
-
-    // element.classList.add('active');
-}
-
-toggleActiveClass(secondTitle);
-toggleActiveClass(secondTitle);
-toggleActiveClass(secondTitle);
-toggleActiveClass(secondTitle);
-
-// secondTitle.style = 'color: red; background-color: green'
-// secondTitle.style.fontSize = '50px';
-
-// console.log(secondTitle.clientWidth)
-// console.log(secondTitle.offsetLeft)
