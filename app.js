@@ -1,124 +1,159 @@
 "use strict";
 
-// const title = document.querySelector(".title");
-// console.log(title);
+// 1. Додавати задачі +
+// 2. Видаляти окремі задачі +
+// 3. Видаляти всі задачі +
+// 4. Фільтрувати задачі +
+// 5. Зберігати в localStorage +
+// 6. Показувати актуальні задачі +
 
-// console.log(title.hasAttribute("id"));
-// console.log(title.hasAttribute("class"));
-// console.log(title.hasAttribute("href"));
+// оголошуємо змінні з якими будемо працювати
+const form = document.querySelector(".create-task-form");
+const taskInput = document.querySelector(".task-input");
+const filterInput = document.querySelector(".filter-input");
+const clearTasksButton = document.querySelector(".clear-tasks");
+const taskList = document.querySelector(".collection");
 
-// console.log(title.getAttribute("id"));
-// title.setAttribute("class", "class-from-attr");
-// title.setAttribute("id", "header");
+// слухачі подій
+// запускаємо функцію renderTasks коли весь HTML загружений
+document.addEventListener("DOMContentLoaded", renderTasks);
+// запускаємо функцію addTask коли відправляємо форму (клікаємо на кнопку "Додати завдання")
+form.addEventListener("submit", addTask);
+// запускаємо функцію removeTask коли клік попадає на список <ul>
+taskList.addEventListener("click", removeTask);
+// запускаємо функцію після кліку на кнопку "Видалити всі елементи"
+clearTasksButton.addEventListener("click", removeAllTasks);
+// запускаємо функцію filterTasks після того як ввідпускаємо клавішу (тоді, коли фокус в інпуті "Пошук завдань")
+filterInput.addEventListener("input", filterTasks);
 
-// title.removeAttribute("id");
-// console.log(title.attributes);
+function renderTasks() {
+  // чистимо все що всередниі тегу ul (collection)
+  taskList.innerHTML = "";
 
-// console.log(title.dataset);
+  // робимо перевірку чи localStorage є щось за ключем tasks
+  if (localStorage.getItem("tasks")) {
+    // якщо щось там є - витягуємо і присвоюємо змінній
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-// console.log(title.nodeType);
-// console.log(title.firstChild.nodeType);
-// console.log(document.nodeType);
+    // для кожної задачі яка є
+    tasks.forEach((task) => {
+      // створюємо елемент списку - <li></li>
+      const li = document.createElement("li");
+      // сторюємо кнопку для видалення
+      const button = document.createElement("button");
 
-// console.log(title.nodeName);
-// console.log(title.firstChild.nodeName);
-// console.log(document.nodeName);
+      // всередині цього елементу списку додаємо опис завдання
+      li.innerHTML = task;
+      // всередину кнопку додаємо значення х
+      button.innerHTML = "X";
+      // додаємо їй клас
+      button.classList.add("delete-btn");
 
-// console.log(title.textContent);
-// console.log(title.firstChild);
+      // записуємо кнопку після всього, що є всередині елементу списку
+      li.append(button);
 
-// const button = document.querySelector(".button");
-// const block = document.querySelector("#block");
-// console.log(block);
+      // записуємо цей елемент в кінець списку - ul (collection)
+      taskList.append(li);
+    });
+  }
+}
 
-// function handleClick() {
-//   console.log("click");
-// }
+// створюємо таску
+function addTask(event) {
+  // зупиняємо поведінку браузера за замовчуванням
+  event.preventDefault();
 
-// function handleMouseOver() {
-//   const randomHeight = Math.round(Math.random() * 100);
-//   block.style.height = `${randomHeight}px`;
-//   console.log("mouseover");
-// }
+  // отримуємо значення з інпута через форму
+  // const value = taskInput.value;
+  // event.target.task ===  taskInput.value
+  const value = event.target.task.value;
 
-// function handleMouseOut() {
-//   console.log("mouseout");
-// }
+  // робимо перевірку на пустоту строки
+  if (value.trim() === "") {
+    return;
+  }
 
-// button.addEventListener("click", handleClick);
-// block.addEventListener("mouseover", handleMouseOver);
-// block.addEventListener("mouseout", handleMouseOut);
+  // повторюємо всі дії з функції renderTasks
+  const li = document.createElement("li");
+  const button = document.createElement("button");
 
-// const form = document.querySelector("form");
-// function handleSubmit(event) {
-//   event.preventDefault();
-//   const name = event.target.name.value;
-//   const email = event.target.email.value;
+  li.innerHTML = value;
+  button.innerHTML = "X";
+  button.classList.add("delete-btn");
 
-//   if (name.length < 2) {
-//     alert("Введіть довше ім'я");
-//     return;
-//   }
+  li.append(button);
+  taskList.append(li);
 
-//   // відправка на сервер
-//   console.log("event: ", event.target.name.value);
-//   console.log("event: ", event.target.email.value);
-// }
-// form.addEventListener("submit", handleSubmit);
-// form.addEventListener("submit", (event) => {});
+  // але тут ще записуємо задачу в локал сторедж
+  storeTaskInLocalStorage(value);
+  // і чистимо інпут
+  taskInput.value = "";
+}
 
-// window.addEventListener("scroll", (e) => {
-//   if (window.scrollY > 20) {
-//     alert("Реклама");
-//   }
-// });
+function storeTaskInLocalStorage(taskValue) {
+  // і чистимо інпут
+  let tasks = [];
 
-// window.addEventListener("resize", (e) => {
-//   console.log(window);
-// });
+  // перевіряємо чи є у localStorage вже якісь завдання
+  if (localStorage.getItem("tasks")) {
+    // якщо вони там є - витягуємо їх і присвоюємо змінній
+    tasks = JSON.parse(localStorage.getItem("tasks"));
+  }
 
-// const button = document.querySelector("button");
-// // console.log(button);
-// button.addEventListener("click", () => {
-//   console.log("click on button");
-// });
+  // додаємо до списку нове завдання
+  tasks.push(taskValue);
 
-// const li = document.querySelector("li");
-// li.addEventListener("click", () => {
-//   console.log("click on li");
-// });
+  // зберігаємо список завданнь в Local Storage
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-// const tableRows = document.querySelectorAll("tr");
-// tableRows.forEach((row) => {
-//   row.addEventListener("click", () => {
-//     console.log("redirect");
-//   });
-// });
+// видалити якусь конкретну таску
+function removeTask(event) {
+  // якщо ми клікнули по хрестику - тоді
+  if (event.target.classList.contains("delete-btn")) {
+    // отримуємо всі елементи з стореджа
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    // отримуємо вміст задачі (те що всередині li)
+    const taskValue = event.target.previousSibling.textContent;
 
-// function handleButtonClick(event) {
-//   event.stopPropagation();
-//   console.log("open drawer", event);
-// }
+    // фільтруємо задачі
+    const filteredTasks = tasks.filter((task) => {
+      return task !== taskValue;
+    });
 
-// const tableButtons = document.querySelectorAll("button");
-// tableButtons.forEach((button) => {
-//   button.addEventListener("click", handleButtonClick, true);
-// });
+    // зберігаємо в стореджі відфільтровані задачі
+    localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+    // запускаємо функцію renderTasks
+    renderTasks();
+  }
+}
 
-detonatorTimer(3);
-// 3
-// 2
-// 1
-// BOOM!
+// видаляємо всі таски
+function removeAllTasks() {
+  // видаляємо елементи з localStorage по ключу tasks
+  localStorage.removeItem("tasks");
+  // запускаємо функцію renderTasks
+  renderTasks();
+}
 
-// detonatorTimer(delay) {
-// 	const timerId = setInterval(() => {
-//         if ('some condition...') {
-//             console.log('...')
-//             delay--
-//         } else {
-//             console.log('BOOM!')
-//             clearInterval(timerId);
-//         }
-//     }, 1000)
-// }
+// фільтруємо задачі
+function filterTasks(event) {
+  // отримуємо результат з інпуту пошуку
+  const searchQuery = event.target.value;
+  // отримуємо всі задачі з dom дерева
+  const liCollection = taskList.querySelectorAll("li");
+
+  // перебираємо всі задачі
+  liCollection.forEach((task) => {
+    // отримуємо вміст задачі
+    const liValue = task.firstChild.textContent;
+
+    // якщо значення з інпута пошуку присутнє в задачі - додаємо dispaay: list-item
+    if (liValue.includes(searchQuery)) {
+      task.style.display = "list-item";
+    } else {
+      // інакше - display: none
+      task.style.display = "none";
+    }
+  });
+}
