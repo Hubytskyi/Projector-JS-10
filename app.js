@@ -1,153 +1,191 @@
 "use strict";
 
-// оголошуємо змінні
-const input = document.querySelector(".input");
-const operators = document.querySelectorAll(".operator");
-const numbers = document.querySelectorAll(".number");
-const clear = document.querySelector(".clear");
-const result = document.querySelector(".result");
+// const dog = {
+//   name: "Dog",
+// };
 
-const operatorsList = ["+", "-", "×", "÷", "."];
-let isResultDisplayed = false;
+// class Animal {
+//   constructor(isEatMeat) {
+//     this.isEatMeat = isEatMeat;
+//   }
 
-// додаємо обробники подій для всіх кнопок з математичними операторами
-operators.forEach((operator) => {
-  operator.addEventListener("click", (event) => {
-    // отримуємо доступ до оператора
-    const operatorValue = event.target.innerHTML;
-    // отримуємо доступ до значення всередині інпута
-    const inputValue = input.innerHTML;
-    // отримуємо доступ до останнього елемента інпута (останній елемент строки)
-    const lastChar = inputValue.at(-1);
+//   intro() {
+//     if (this.isEatMeat) {
+//       console.log("I like to eat meat");
+//     } else {
+//       console.log("I don't like to eat meat");
+//     }
+//   }
+// }
 
-    // якщо строка пуста, оператор не додаємо, код зупиняється
-    if (inputValue === "") {
-      return null;
+// const auth = {
+//   login: function () {},
+//   logout: function () {},
+// };
+
+// class Auth {
+//   login() {}
+//   logout() {}
+// }
+
+// class API {
+//   constructor(baseUrl) {
+//     this.baseUrl = baseUrl;
+//   }
+// }
+
+// class BookAPI extends API {
+//   constructor(baseUrl) {
+//     super(baseUrl);
+//   }
+//   getAllBook() {}
+
+//   getBookById(id) {}
+
+//   deleteBook(id) {}
+// }
+
+// const bookApi = new BookAPI("localhost:3000");
+
+// class Pets extends Animal {
+//   constructor(type, isEatMeat) {
+//     super(isEatMeat);
+//     this.type = type;
+//   }
+
+//   about() {
+//     console.log(`My type is ${this.type}, ${this.isEatMeat}`);
+//   }
+
+//   intro() {
+//     console.log("Hello!");
+//   }
+// }
+
+// bookApi.getAllBook()
+
+// class Cat extends Pets {}
+// class PremiumCat extends Cat {}
+
+// class Dog {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   run() {
+//     console.log(`My name is ${this.name}, and I like to run`);
+//   }
+// }
+
+// const loki = new Dog("Loki");
+// const animal = new Animal(false);
+// const cat = new Pets("cat", true);
+// const dog = new Pets("dog", false);
+
+// loki.run();
+
+// console.log(Animal);
+
+// animal.intro();
+
+// cat.intro();
+// console.log(cat);
+// console.log(dog);
+
+class CoffeeMachine {
+  #counter;
+
+  constructor(name, autoClear) {
+    this.#counter = 0;
+    this.name = name;
+  }
+
+  makeCoffee() {
+    if (this.#counter >= 5) {
+      if (autoClear) {
+        this.clear();
+      } else {
+        console.log("Ви не можете зробити більше кави, очистіть двигун");
+        return;
+      }
     }
+    console.log("Ваша кава готова");
+    this.#counter += 1;
+  }
 
-    // якщо в останній елемент в інпуті це оператор, то перезаписуємо його
-    if (operatorsList.includes(lastChar)) {
-      const newInputValue = inputValue.substring(0, inputValue.length - 1);
-      input.innerHTML = newInputValue + operatorValue;
-    } else {
-      // в іншому випадку додаємо до строки
-      input.innerHTML += operatorValue;
-    }
+  makeLatte() {
+    this.#warmMilk();
+    this.makeCoffee();
+  }
 
-    isResultDisplayed = true;
+  #warmMilk() {
+    console.log("Ви підігріли молоко");
+  }
+
+  clear() {
+    this.#counter = 0;
+  }
+}
+
+class Rabbit {
+  constructor(toys) {
+    this.toys = toys;
+  }
+
+  someMethod() {
+    const updatedToys = this.toys.map((toy) => toy.toUpperCase());
+    return updatedToys;
+  }
+}
+
+const array = [1, 2, 3, 4, 5, 6];
+
+const rabbit = new Rabbit(array);
+const result = rabbit.someMethod();
+const franke = new CoffeeMachine("Franke");
+const smeg = new CoffeeMachine("Smeg", true);
+franke.makeCoffee();
+franke.makeCoffee();
+franke.makeCoffee();
+franke.makeCoffee();
+franke.makeCoffee();
+franke.makeCoffee();
+franke.clear();
+franke.makeCoffee();
+franke.makeLatte();
+// franke.#counter = 0;
+console.log(franke);
+
+// homework
+const taskList = document.querySelector(".collection");
+taskList.addEventListener("click", handleItem);
+
+function handleItem(event) {
+  if (event.target.classList.contains("delete-btn")) {
+    removeTask();
+  }
+  if (event.target.classList.contains("edit-btn")) {
+    editTask();
+  }
+}
+function editTask() {
+  // ...
+}
+// видалити якусь конкретну таску
+function removeTask(event) {
+  // якщо ми клікнули по хрестику - тоді
+  // отримуємо всі елементи з стореджа
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  // отримуємо вміст задачі (те що всередині li)
+  const taskValue = event.target.previousSibling.textContent;
+
+  // фільтруємо задачі
+  const filteredTasks = tasks.filter((task) => {
+    return task !== taskValue;
   });
-});
 
-// додамо обробники подій для всіх кнопок з цифрами
-numbers.forEach((number) => {
-  number.addEventListener("click", (event) => {
-    // отримуємо доступ до цифри
-    const numberValue = event.target.innerHTML;
-    // отримуємо доступ до значення всередині інпута
-    const inputValue = input.innerHTML;
-    // отримуємо доступ до останнього елемента інпута (останній елемент строки)
-    const lastChar = inputValue.at(-1);
-
-    // якщо в інпуті останній елемент крапка і ми нажимаємо на ще одну крапку - код зупиняється
-    if (lastChar === "." && numberValue === ".") {
-      return null;
-    }
-
-    // якщо юзер просто вводить число - то ми його додаємо до введеної операції
-    if (!isResultDisplayed) {
-      input.innerHTML += numberValue;
-    } else if (isResultDisplayed && operatorsList.includes(lastChar)) {
-      // якщо юзер вводить число коли вже висвічується результат попередньої операції і оператор є останнім символом інпута
-      // введене число додаємо до інпута
-      input.innerHTML += numberValue;
-      isResultDisplayed = false;
-    } else {
-      // якщо юзер вводить число коли відображається результат попередньої операції
-      // ми перезаписуємо весь інпут новим числом
-      input.innerHTML = numberValue;
-      isResultDisplayed = false;
-    }
-  });
-});
-
-clear.addEventListener("click", () => {
-  // очищуємо значення в рядку
-  input.innerHTML = "";
-  // ставимо позначку що це вже не результат попередньої введеної операції
-  isResultDisplyed = false;
-});
-
-result.addEventListener("click", () => {
-  // отримуємо доступ до значення всередині інпута
-  const inputValue = input.innerHTML;
-  // отримуємо доступ до останнього елемента інпута (останній елемент строки)
-  const lastChar = inputValue.at(-1);
-
-  // якщо юзер останнім символом ввів оператор і натискає на отримання результату
-  if (operatorsList.includes(lastChar)) {
-    return null;
-  }
-
-  // отримуємо масив всіх введених чисел
-  const numbersOnly = inputValue.split(/\+|\-|\×|\÷/g);
-  // отримуємо масив всіх введених операторів (їх завжди менше на один ніж введених чисел)
-  const operatorsOnly = inputValue.replace(/[0-9]|\./g, "").split("");
-
-  // ділення
-  // знаходимо перший оператор ділення серед всіх операторів
-  let dividerIndex = operatorsOnly.indexOf("÷");
-  // доки оператор ділення є у масиві операторів (onlyOperators)
-  while (dividerIndex !== -1) {
-    // знаходимо у масиві значення чисел які знаходяться на цьому ж індексі що й оператор і наступне число і ділимо їх
-    const result = numbersOnly[dividerIndex] / numbersOnly[dividerIndex + 1];
-
-    // і замінюємо їх на результат
-    numbersOnly.splice(dividerIndex, 2, result);
-    // видаляємо цей оператор ділення з масиву операторів
-    operatorsOnly.splice(dividerIndex, 1);
-
-    // знаходимо наступний оператор ділення серед всіх операторів
-    dividerIndex = operatorsOnly.indexOf("÷");
-  }
-
-  // множення
-  let multiplyIndex = operatorsOnly.indexOf("×");
-
-  while (multiplyIndex !== -1) {
-    const result = numbersOnly[multiplyIndex] * numbersOnly[multiplyIndex + 1];
-
-    numbersOnly.splice(multiplyIndex, 2, result);
-    operatorsOnly.splice(multiplyIndex, 1);
-
-    multiplyIndex = operatorsOnly.indexOf("×");
-  }
-
-  // віднімання
-  let substractIndex = operatorsOnly.indexOf("-");
-  while (substractIndex !== -1) {
-    const result =
-      numbersOnly[substractIndex] - numbersOnly[substractIndex + 1];
-
-    numbersOnly.splice(substractIndex, 2, result);
-    operatorsOnly.splice(substractIndex, 1);
-
-    substractIndex = operatorsOnly.indexOf("-");
-  }
-
-  // додавання
-  let sumIndex = operatorsOnly.indexOf("+");
-  while (sumIndex !== -1) {
-    const result =
-      parseFloat(numbersOnly[sumIndex]) + parseFloat(numbersOnly[sumIndex + 1]);
-
-    numbersOnly.splice(sumIndex, 2, result);
-    operatorsOnly.splice(sumIndex, 1);
-
-    sumIndex = operatorsOnly.indexOf("+");
-  }
-
-  // замінюємо значення введеної операції на її результат
-  input.innerHTML = numbersOnly[0];
-  // ставимо позначку що це вже результат введеної операції
-  isResultDisplayed = true;
-});
+  // зберігаємо в стореджі відфільтровані задачі
+  localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+  // запускаємо функцію renderTasks
+  renderTasks();
+}
