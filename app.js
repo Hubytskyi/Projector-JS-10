@@ -1,80 +1,82 @@
 "use strict";
 
-const form = document.querySelector(".book-form");
-const bookList = document.querySelector(".book-list");
+// function one() {
+//   let sum = 0;
+//   for (let i = 0; i < 1000000000; i++) {
+//     sum += i;
+//   }
 
-class Book {
-  constructor(title, author, isbn) {
-    this.title = title;
-    this.author = author;
-    this.isbn = isbn;
-  }
-}
+//   two();
+//   console.log(sum);
+//   return sum;
+// }
 
-class UI {
-  constructor(form) {
-    this.form = form;
-    this.tableBody = document.querySelector(".book-list");
-  }
+// function two() {
+//   let sum = 0;
+//   for (let i = 0; i < 1000000000; i++) {
+//     sum += i;
+//   }
 
-  addBook(book) {
-    const row = document.createElement("tr");
+//   return sum;
+// }
 
-    row.innerHTML = `
-      <td>${book.title}</td>
-      <td>${book.author}</td>
-      <td>${book.isbn}</td>
-      <td><button class="delete-book">x</button></td>
-    `;
+// console.time();
+// console.log("before call");
+// // one();
+// setTimeout(one);
+// console.log("between call");
+// console.log("after call");
+// console.timeEnd();
 
-    this.tableBody.appendChild(row);
-  }
+// function outer() {
+//   console.log("outer");
 
-  removeBook(target) {
-    if (target.classList.contains("delete-book")) {
-      target.closest("tr").remove();
-      this.showAlert("Ви успішно видалили книгу!", "success");
-    }
-  }
+//   function inner() {
+//     console.log("inner");
+//   }
 
-  showAlert(message, className) {
-    const div = document.createElement("div");
-    div.classList = className;
-    div.innerHTML = message;
+//   inner();
+// }
 
-    this.form.before(div);
+// outer();
 
-    setTimeout(() => {
-      div.remove();
-    }, 3000);
-  }
+// []
+// ["outer"]
+// ["outer", "inner"]
+// ["outer", "inner", "log"]
+// ["outer", "inner"]
+// ["outer"]
+// []
 
-  resetForm() {
-    this.form.reset();
-  }
-}
+// function main() {
+//   setTimeout(function greet() {
+//     console.log("Hello");
+//   }, 2000);
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+//   console.log("Bye!");
+// }
 
-  const titleValue = event.target.title.value.trim();
-  const authorValue = event.target.author.value.trim();
-  const isbnValue = event.target.isbn.value.trim();
+// main();
 
-  const ui = new UI(form);
+const result = fetch("http://localhost:3000/api/users"); // '[{id: 1, name: '}]'
+result.json(); // [{id: 1, name: '}]
 
-  if ([titleValue, authorValue, isbnValue].includes("")) {
-    ui.showAlert("Необхідно заповнити всі поля", "error");
-  } else {
-    const book = new Book(titleValue, authorValue, isbnValue);
+// /api/setUser
+// /api/getUsers
 
-    ui.addBook(book);
-    ui.resetForm();
-    ui.showAlert("Ви успішно додали книгу!", "success");
-  }
+// GET /api/users - отримання масиву користувачів
+// POST /api/users
+// PUT/PATCH (UPDATE) /api/users/1
+// DELETE /api/users/1
+
+setTimeout(() => {
+  console.log("setTimeout");
 });
 
-bookList.addEventListener("click", (event) => {
-  const ui = new UI(form);
-  ui.removeBook(event.target);
+const button = document.querySelector("button");
+button.addEventListener("click", () => {
+  console.log("click");
+  setTimeout(() => {
+    console.log("setTimeout click");
+  });
 });
