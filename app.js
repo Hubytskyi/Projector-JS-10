@@ -1,83 +1,120 @@
-"use strict";
+'use strict';
 
-// const p1 = Promise.resolve(3);
-// const p2 = 123;
-// const p3 = new Promise(function (resolve, reject) {
-//   setTimeout(() => {
-//     reject("some text");
-//   }, 2000);
-// });
+// api - https://openweathermap.org/
+// url for icons - https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/
 
-// const p4 = new Promise(function (resolve, reject) {
-//   setTimeout(() => {
-//     resolve("some text 2");
-//   }, 3000);
-// });
-
-// Promise.any([p3, p4]).then((values) => {
-//   console.log(values);
-// });
-
-// function getUsers2() {
-//   let users = fetch("https://jsonplaceholder.typicode.com/users")
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//     })
-//     .then((users) => {
-//       return users;
-//     });
-//   console.log(users);
-// }
-
-// new Promise((resolve, reject) => {
-//   console.log("start");
-
-//   fetch("https://jsonplaceholder.typicode.com/users")
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       }
-//     })
-//     .then((users) => {
-//       fetch("https://jsonplaceholder.typicode.com/users").then(
-//         (response) => {}
-//       );
-//     });
-// });
-
-let isLoading = false;
-
-async function getUsers() {
-  isLoading = true;
-
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-
-    if (response.ok) {
-      const users = await response.json();
-      const response2 = await fetch(
-        "https://jsonplaceholder.typicode.com/todos"
-      );
-      const todos = await response2.json();
-      console.log(todos);
-      return;
-    }
-
-    // throw new Error("some error");
-  } catch (e) {
-    // (e)
-    console.log();
-  } finally {
-    isLoading = false;
-  }
+const iconsMap = {
+  '01n': 'https://someurl'
 }
 
-getUsers();
+const form = document.querySelector('form');
+const input = document.querySelector('input');
+const msg = document.querySelector('.msg');
+const cities = document.querySelector('.cities');
 
-// try -> catch(e) -> finnaly
-// then(res) -> catch(e) -> finnaly
+const findedCities = [];
 
-// const button = doc...
-// button.addEventListener
+const API_KEY = '742d340226f94c6ad754526df79b475f';
+
+function renderCity(cityData) {
+ // const main = cityData.main;
+ const { main, sys, weather, name } = cityData;
+
+ if (findedCities.includes(name.toLowerCase())) {
+   msg.innerHTML = `You already know the weather for ${name}`;
+
+   return null;
+ }
+
+ // iconsMap[weather[0]['icon']]
+ const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]['icon']}.svg`;
+
+ const li = document.createElement('li');
+ li.classList.add('city');
+ 
+ const markup = `
+   <h2 class="city-name">
+     <span>${name}</span>
+     <sup>${sys.country}</sup>
+   </h2>
+   <div class="city-temp">${Math.round(main.temp)}</div>
+   <img class="city-icon" src="${icon}" alt="${name}"/>
+   <span>${weather[0]['description']}</span>
+ `;
+
+ li.innerHTML = markup;
+ cities.appendChild(li);
+
+ findedCities.push(name.toLowerCase());
+}
+
+function fetchWeather(event) {
+  event.preventDefault();
+  const inputValue = input.value;
+
+  if (inputValue.trim() === '') {
+    input.focus()
+
+    return null;
+  }
+
+  if (findedCities.includes(inputValue.toLowerCase())) {
+    msg.innerHTML = `You already know the weather for ${inputValue}`;
+
+    return null;
+  }
+
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${API_KEY}&units=metric`)
+  .then((response) => {
+    console.log(response)
+    if (!response.ok) {
+      throw new Error('Something went wrong')
+    } 
+
+    return response.json();
+  })
+  .then(renderCity)
+  .catch((e) => {
+    msg.innerHTML = e.message;
+  })
+  .finally(() => {
+    form.reset();
+    input.focus();
+  })
+}
+
+async function fetchWeather2(event) {
+  event.preventDefault();
+  const inputValue = input.value;
+
+  if (inputValue.trim() === '') {
+    input.focus()
+
+    return null;
+  }
+
+  if (findedCities.includes(inputValue.toLowerCase())) {
+    msg.innerHTML = `You already know the weather for ${inputValue}`;
+
+    return null;
+  }
+
+  try {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${API_KEY}&units=metric`);
+    if (!response.ok) {
+      throw new Error('Something went wrong')
+    } 
+
+    const cityData = await response.json();
+    renderCity(cityData);
+
+  } catch(e) {
+    msg.innerHTML = e.message;
+  } finally {
+    form.reset();
+    input.focus();
+  }
+
+}
+
+form.addEventListener('submit', fetchWeather2);
