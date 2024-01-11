@@ -1,120 +1,115 @@
-'use strict';
+"use strict";
 
-// api - https://openweathermap.org/
-// url for icons - https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/
+// https://api.github.com
+// clientId - d9308aacf8b204d361fd
+// secretId - 84969aeef73956f4ec9e8716d1840532802bb81b
 
-const iconsMap = {
-  '01n': 'https://someurl'
+const GITHUB_API_URL = "https://api.github.com";
+const searchUser = document.querySelector(".searchUser");
+
+class GitHubController {
+  constructor(githubService, ui) {
+    this.githubService = githubService;
+    this.ui = ui;
+  }
+
+  async handleSearchInput(inputValue) {
+    if (inputValue.trim() !== "") {
+      const userData = await this.githubService.getUser(inputValue);
+
+      if (userData.message) {
+        this.ui.showAlert(userData.message, "alert alert-danger");
+        return;
+      }
+
+      return this.ui.showProfile(userData);
+    }
+
+    this.ui.clearProfile();
+  }
 }
 
-const form = document.querySelector('form');
-const input = document.querySelector('input');
-const msg = document.querySelector('.msg');
-const cities = document.querySelector('.cities');
+class GitHubService {
+  constructor(clientId, secretId) {
+    this.clientId = clientId;
+    this.secretId = secretId;
+  }
 
-const findedCities = [];
+  async getUser(userName) {
+    const response = await fetch(
+      `${GITHUB_API_URL}/users/${userName}?client_id=${this.clientId}&client_secret=${this.secretId}`
+    );
 
-const API_KEY = '742d340226f94c6ad754526df79b475f';
+    const user = await response.json();
 
-function renderCity(cityData) {
- // const main = cityData.main;
- const { main, sys, weather, name } = cityData;
-
- if (findedCities.includes(name.toLowerCase())) {
-   msg.innerHTML = `You already know the weather for ${name}`;
-
-   return null;
- }
-
- // iconsMap[weather[0]['icon']]
- const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]['icon']}.svg`;
-
- const li = document.createElement('li');
- li.classList.add('city');
- 
- const markup = `
-   <h2 class="city-name">
-     <span>${name}</span>
-     <sup>${sys.country}</sup>
-   </h2>
-   <div class="city-temp">${Math.round(main.temp)}</div>
-   <img class="city-icon" src="${icon}" alt="${name}"/>
-   <span>${weather[0]['description']}</span>
- `;
-
- li.innerHTML = markup;
- cities.appendChild(li);
-
- findedCities.push(name.toLowerCase());
+    return user;
+  }
 }
 
-function fetchWeather(event) {
-  event.preventDefault();
-  const inputValue = input.value;
-
-  if (inputValue.trim() === '') {
-    input.focus()
-
-    return null;
+class UI {
+  constructor() {
+    this.profile = document.querySelector(".profile");
+    this.alertContainer = document.querySelector(".search");
   }
 
-  if (findedCities.includes(inputValue.toLowerCase())) {
-    msg.innerHTML = `You already know the weather for ${inputValue}`;
-
-    return null;
+  showProfile(user) {
+    this.profile.innerHTML = `
+      <div class="card card-body mb-3">
+        <div class="row">
+          <div class="col-md-3">
+            <img class="img-fluid mb-2" src="${user.avatar_url}">
+            <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block mb-4">View Profile</a>
+          </div>
+          <div class="col-md-9">
+            <span class="badge badge-primary">Public Repos: ${user.public_repos}</span>
+            <span class="badge badge-secondary">Public Gists: ${user.public_gists}</span>
+            <span class="badge badge-success">Followers: ${user.followers}</span>
+            <span class="badge badge-info">Following: ${user.following}</span>
+            <br><br>
+            <ul class="list-group">
+              <li class="list-group-item">Company: ${user.company}</li>
+              <li class="list-group-item">Website/Blog: ${user.blog}</li>
+              <li class="list-group-item">Location: ${user.location}</li>
+              <li class="list-group-item">Member Since: ${user.created_at}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <h3 class="page-heading mb-3">Latest Repos</h3>
+      <div class="repos"></div>
+    `;
   }
 
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${API_KEY}&units=metric`)
-  .then((response) => {
-    console.log(response)
-    if (!response.ok) {
-      throw new Error('Something went wrong')
-    } 
+  clearProfile() {
+    this.profile.innerHTML = "";
+  }
 
-    return response.json();
-  })
-  .then(renderCity)
-  .catch((e) => {
-    msg.innerHTML = e.message;
-  })
-  .finally(() => {
-    form.reset();
-    input.focus();
-  })
+  showAlert(message, className) {
+    const div = document.createElement("div");
+
+    div.className = className;
+    div.innerHTML = message;
+
+    this.alertContainer.before(div);
+
+    this.clearAlert(div);
+  }
+
+  clearAlert(alert) {
+    setTimeout(() => {
+      alert.remove();
+    }, 3000);
+  }
 }
 
-async function fetchWeather2(event) {
-  event.preventDefault();
-  const inputValue = input.value;
+const ui = new UI();
+const githubService = new GitHubService(
+  "8f7144eae7126087f5e2",
+  "a32c98123e9a8179f28b396c0632a56672d9d55c"
+);
+const githubController = new GitHubController(githubService, ui);
 
-  if (inputValue.trim() === '') {
-    input.focus()
-
-    return null;
-  }
-
-  if (findedCities.includes(inputValue.toLowerCase())) {
-    msg.innerHTML = `You already know the weather for ${inputValue}`;
-
-    return null;
-  }
-
-  try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${API_KEY}&units=metric`);
-    if (!response.ok) {
-      throw new Error('Something went wrong')
-    } 
-
-    const cityData = await response.json();
-    renderCity(cityData);
-
-  } catch(e) {
-    msg.innerHTML = e.message;
-  } finally {
-    form.reset();
-    input.focus();
-  }
-
-}
-
-form.addEventListener('submit', fetchWeather2);
+searchUser.addEventListener("input", async (e) => {
+  const inputValue = e.target.value;
+  await githubController.handleSearchInput(inputValue);
+});
